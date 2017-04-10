@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:defaultValue="nobody"
+        android:key="nick"
+        android:title="nickname" />
+    <EditTextPreference
+        android:defaultValue="10.10.10.2:4000"
+        android:key="server"
+        android:title="server address:port" />
+
+
+</PreferenceScreen>
