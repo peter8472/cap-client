@@ -2,21 +2,44 @@ package info.p445m.captioneer;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.speech.*;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements RecognitionListener {
     public final int SPEECH_REQUEST_CODE=0;
+
+    private class getV extends AsyncTask<String , Void,String> {
+        @Override
+        protected String doInBackground(String... params) {
+            return "";
+
+        }
+        @Override
+        protected void onPostExecute(String s) {
+            TextView t = (TextView) findViewById (R.id.answer);
+            t.setText(s);
+            Log.w("captioneer", "on post execute");
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +72,17 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
         });
     }
     public void sendToServer(String message) {
+        SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String nick = sPrefs.getString("nick","");
+        String serverPort = sPrefs.getString("server","");
+        String []ray =serverPort.split(":");
+        int port = Integer.parseInt(ray[1]);
+        try {
+            Socket s = new Socket(ray[0],port);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 

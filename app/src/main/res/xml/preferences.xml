@@ -1,13 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="server 1"
+        android:key="blank_key" >
+
     <EditTextPreference
         android:defaultValue="nobody"
         android:key="nick"
-        android:title="nickname" />
+        android:title="nickname for server 1" />
     <EditTextPreference
-        android:defaultValue="10.10.10.2:4000"
+        android:defaultValue="192.168.1.100:8870"
         android:key="server"
-        android:title="server address:port" />
+        android:title="server 1 address:port" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="garbage"
+        android:key="blank_key" >
+
+    <EditTextPreference
+        android:defaultValue="nobody"
+        android:key="nick2"
+        android:title="spare field for cut/paste" />
+    <EditTextPreference
+        android:defaultValue="localhost:0"
+        android:key="server2"
+        android:title="spare foeld for copy/paste" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="server 3"
+        android:key="blank_key" >
+</PreferenceCategory>
+
+
 
 
 </PreferenceScreen>
