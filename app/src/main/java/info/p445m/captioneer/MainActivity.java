@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setTheme(R.style.Theme_AppCompat_DayNight_NoActionBar);
+        //setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -64,12 +66,13 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
         hitSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(v, "No network support", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 EditText answer = (EditText) findViewById(R.id.answer);
                 sendToServer(answer.getText().toString());
             }
         });
+        hitSend.setVisibility(View.INVISIBLE);
     }
     public void sendToServer(String message) {
         SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -80,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
         try {
             Socket s = new Socket(ray[0],port);
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
 
 
