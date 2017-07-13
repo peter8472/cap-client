@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,13 +21,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketAddress;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements RecognitionListener {
+public class MainActivity extends AppCompatActivity implements RecognitionListener, SharedPreferences.OnSharedPreferenceChangeListener {
     public final int SPEECH_REQUEST_CODE=0;
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
+        if (key.equals("fontsize")) {
+            String val = preferences.getString(key, "36");
+            EditText outwin = (EditText) findViewById(R.id.answer);
+            outwin.setTextSize(Float.valueOf(val));
+        }
+
+    }
 
     private class getV extends AsyncTask<String , Void,String> {
         @Override
@@ -46,7 +56,20 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
         super.onCreate(savedInstanceState);
         //setTheme(R.style.Theme_AppCompat_DayNight_NoActionBar);
         //setTheme(R.style.AppTheme);
+        PreferenceManager.setDefaultValues(this, R.xml.preferences  , false );
+
         setContentView(R.layout.activity_main);
+        EditText outwin = (EditText) findViewById(R.id.answer);
+        SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(this);
+        p.registerOnSharedPreferenceChangeListener(this);
+        String fs=p.getString("fontsize", "99");
+        Log.d("fontsze= ", fs);
+
+
+            outwin.setTextSize(TypedValue.COMPLEX_UNIT_PX, Float.valueOf(fs));
+
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -135,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent i = new Intent(this, Settings.class);
+            Intent i = new Intent(this, MySettings.class);
             startActivity(i);
             return true;
         }

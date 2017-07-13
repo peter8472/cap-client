@@ -14,26 +14,12 @@
         android:key="server"
         android:title="server 1 address:port" />
     </PreferenceCategory>
-    <PreferenceCategory
-        android:title="garbage"
-        android:key="blank_key" >
-
     <EditTextPreference
-        android:defaultValue="nobody"
-        android:key="nick2"
-        android:title="spare field for cut/paste" />
-    <EditTextPreference
-        android:defaultValue="localhost:0"
-        android:key="server2"
-        android:title="spare foeld for copy/paste" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="server 3"
-        android:key="blank_key" >
-</PreferenceCategory>
-
-
+        android:defaultValue="22"
+        android:key="fontsize"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Font Size" />
 
 
 </PreferenceScreen>
